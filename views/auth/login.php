@@ -1,6 +1,6 @@
 <div class="contenedor">
-    <h1>Quaxar</h1>
-    <p class="tagline">Gestion de clientes</p>
+<?php include_once  __DIR__ .'/../templates/nombre-sitio.php'; ?>
+
 
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Iniciar Sesión</p>
