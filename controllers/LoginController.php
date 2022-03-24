@@ -34,30 +34,38 @@ class LoginController{
         ]);
     }
 
-    public static function recuperar(){
-        echo "Desde recuperar"; 
-
+    public static function recuperar(Router $router){ 
         if($_SERVER['REQUEST_METHOD']==='post'){
 
         }
+        $router ->render('auth/recuperar',[
+            'tiutlo'=>'Recuperar contraseña'
+        ]);
     }
 
-    public static function reestablecer(){
-        echo "Desde reestablecer";
-
+    public static function reestablecer(Router $router){
         if($_SERVER['REQUEST_METHOD']==='post'){
 
         }
+        $router ->render('auth/reestablecer',[
+            'tiutlo'=>'Reestablecer contraseña'
+        ]);
     }
 
-    public static function mensaje(){
-        echo "Desde mensaje"; 
+    public static function mensaje(Router $router){
+        
+        $router->render('auth/mensaje',[
+            'titulo'=>'Cuenta creada exitosamente'
+        ]);
 
         
     }
     
-    public static function confirmar(){
-        echo "Desde confirmar"; 
+    public static function confirmar(Router $router){
+        
+        $router->render('auth/confirmar',[
+            'titulo'=>'Confirmar cuenta'
+        ]);
 
         
     }
