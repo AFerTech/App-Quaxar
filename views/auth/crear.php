@@ -11,7 +11,10 @@
                     type="text"
                     id="nombre"
                     placeholder="nombre"
-                    name="nombre">
+                    name="nombre"
+                    value="<?php echo $usuario->nombre; ?>"
+                    >
+                    
             </div>
             <div class="campo">
                 <label for="email">Email</label>
@@ -19,7 +22,9 @@
                     type="email"
                     id="email"
                     placeholder="email"
-                    name="email">
+                    name="email"
+                    value="<?php echo $usuario->email; ?>"
+                    >
             </div>
             <div class="campo">
                 <label for="password">Password</label>

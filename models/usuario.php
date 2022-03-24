@@ -16,4 +16,16 @@ class usuario extends ActiveRecord{
         $this->token= $args['token'] ?? '';
         $this->confirmado= $args['confirmado'] ?? '';
     }
+
+    public function validarCuenta(){
+        if(!$this->nombre){
+            self::$alertas['error'][]='Nombre obligatorio';
+        }
+        if (!$this->email){
+            self::$alertas['eror'][]='Correo obligatorio';
+        }
+        return self::$alertas;
+
+
+    }
 }
