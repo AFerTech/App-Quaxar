@@ -26,19 +26,31 @@ class LoginController{
     }
 
     public static function crear(Router $router){ 
+        $alertas = [];
         $usuario = new usuario;
 
         if($_SERVER['REQUEST_METHOD']==='POST'){
+            
             $usuario->sincronizar($_POST);
-
+            
             $alertas = $usuario->validarCuenta();
 
-            debuguear($alertas);
+           if(empty($alertas)){
+            $existeUsuario= usuario::where('email',$usuario->email);
 
+            if($existeUsuario){
+                usuario::setAlerta('error','Usuario ya registrado');
+                $alertas= usuario::getAlertas();
+            }else{
+                
+                // Crear el nuevo usuario
+            }
+           }
         }
         $router->render('auth/crear',[
             'titulo'=> 'Crear cuenta',
-            'usuario'=> $usuario
+            'usuario'=> $usuario,
+            'alertas'=> $alertas
         ]);
     }
 
