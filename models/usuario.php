@@ -13,9 +13,9 @@ class usuario extends ActiveRecord{
         $this->nombre= $args['nombre'] ?? '';
         $this->email= $args['email'] ?? '';
         $this->password= $args['password'] ?? '';
-        $this->password2= $args['password'] ?? '';
+        $this->password2= $args['password2'] ?? '';
         $this->token= $args['token'] ?? '';
-        $this->confirmado= $args['confirmado'] ?? '';
+        $this->confirmado= $args['confirmado'] ?? 0;
     }
 
     public function validarCuenta(){
@@ -28,7 +28,7 @@ class usuario extends ActiveRecord{
         if (!$this->password){
             self::$alertas['eror'][]='Escribir contraseña';
         }
-        if (strlen(!$this->password)<8){
+        if (strlen($this->password)<8){
             self::$alertas['eror'][]='La contraseña debe contener mínimo 8 carácteres';
         }
         if ($this->password!==$this->password2){
@@ -37,5 +37,13 @@ class usuario extends ActiveRecord{
         return self::$alertas;
 
 
+    }
+
+    public function hashPassword(){
+        $this->password= password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    public function crearToken(){
+        $this->token = md5(uniqid() );
     }
 }
