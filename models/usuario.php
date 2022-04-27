@@ -18,6 +18,21 @@ class usuario extends ActiveRecord{
         $this->confirmado= $args['confirmado'] ?? 0;
     }
 
+    public function validarSesion(){
+
+        if (!$this->email){
+            self::$alertas['error'][]='Correo obligatorio';
+        }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+            self::$alertas['error'][]='Correo no valido';
+        }
+        if (!$this->password){
+            self::$alertas['error'][]='Escribir contraseña';
+        }
+        return self::$alertas;
+
+    }
+
     public function validarCuenta(){
         if(!$this->nombre){
             self::$alertas['error'][]='Nombre obligatorio';
@@ -45,8 +60,6 @@ class usuario extends ActiveRecord{
 
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             self::$alertas['error'][]='Correo no valido';
-        
-
         }
         return self::$alertas;
     }
