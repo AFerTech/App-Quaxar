@@ -28,7 +28,7 @@
         </form>
         <div class="acciones">
             <a href="/crear">Crear cuenta nueva</a>
-            <a href="/reestablecer">Reestablecer contraseña</a>
+            <a href="/recuperar">Recuperar cuenta</a>
         </div>
 
     </div>

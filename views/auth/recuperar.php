@@ -2,10 +2,13 @@
 <?php include_once  __DIR__ .'/../templates/nombre-sitio.php'; ?>
 
 
-    <div class="contenedor-sm">
-        <p class="descripcion-pagina">Recuperar contraseña</p>
+<div class="contenedor-sm">
+        <?php include_once __DIR__ .'/../templates/alertas.php'; ?>
+        <p class="descripcion-pagina">Recuperar cuenta</p>
+        
+        
 
-        <form class="formulario" method="POST" action="/recuperar">
+        <form class="formulario" method="POST" action="/recuperar" novalidate>
             <div class="campo">
                 <label for="email">Email</label>
                 <input	

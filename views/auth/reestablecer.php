@@ -1,11 +1,15 @@
 <div class="contenedor reestablecer">
 <?php include_once  __DIR__ .'/../templates/nombre-sitio.php'; ?>
 
-
     <div class="contenedor-sm">
+
         <p class="descripcion-pagina">Ingresar nueva contraseña</p>
 
-        <form class="formulario" method="POST" action="/reestablecer">
+        <?php include_once __DIR__ .'/../templates/alertas.php'; ?>
+
+        <?php  if($mostrar) {   ?>
+
+        <form class="formulario" method="POST" >
             <div class="campo">
                 <label for="password">Password</label>
                 <input	
@@ -26,6 +30,8 @@
                    class="boton"
                    value="Guardar">
         </form>
+
+        <?php } ?>
         <div class="acciones">
             <a href="/">Iniciar Sesión</a>
             

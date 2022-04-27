@@ -43,20 +43,14 @@ class LoginController{
                 usuario::setAlerta('error','Usuario ya registrado');
                 $alertas= usuario::getAlertas();
             }else{
-
-
                 // hashear password
                 $usuario->hashPassword();
                 // eliminar password 2
                 unset($usuario->password2);
                 // generar token
                 $usuario->crearToken();
-                
-                // debuguear($usuario);
-
                 // Crear el nuevo usuario
                $resultado = $usuario->guardar();
-
                 // Envio de email
                 $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
                 
@@ -76,20 +70,88 @@ class LoginController{
     }
 
     public static function recuperar(Router $router){ 
-        if($_SERVER['REQUEST_METHOD']==='post'){
+        $alertas = [];
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $usuario = new usuario($_POST);
+            $alertas = $usuario->validarEmail();
+
+            if(empty($alertas)){
+                // buscando el usuario
+                $usuario= usuario::where('email', $usuario->email);
+
+                if($usuario && $usuario->confirmado){
+                    
+                    $usuario->crearToken();
+                    unset ($usuario->password2);
+
+                    $usuario->guardar();
+
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarCorreoRecuperar();
+                    
+
+                    usuario::setAlerta('exito', 'Revisar Correo');
+
+                }else{
+                    usuario::setAlerta('error', 'Usuario no existe o no confirmado');
+                   
+                }
+            }
 
         }
-        $router ->render('auth/recuperar',[
-            'tiutlo'=>'Recuperar contraseña'
+        $alertas = usuario::getAlertas();
+
+        $router->render('auth/recuperar',[
+            'titulo'=>'Recuperar cuenta',
+            'alertas'=> $alertas
         ]);
     }
 
     public static function reestablecer(Router $router){
-        if($_SERVER['REQUEST_METHOD']==='post'){
 
+        $token = s($_GET['token']);
+        $mostrar = true;
+
+        if(!$token)  header('Location: /');
+
+        $usuario = usuario::where('token', $token);
+
+        if(empty($usuario)){
+            usuario::setAlerta('error', 'Error');
+            $mostrar=false;
         }
-        $router ->render('auth/reestablecer',[
-            'tiutlo'=>'Reestablecer contraseña'
+       
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+
+            $usuario->sincronizar($_POST);
+
+            $alertas = $usuario->validarPassword();
+
+            if(empty($alertas)){
+
+
+                $usuario->hashPassword();
+
+                $usuario->token=null;
+
+                $resultado = $usuario->guardar();
+
+                if($resultado){
+                    header('Location: /');
+                }
+
+
+                debuguear($usuario);
+            }
+        }
+
+        $alertas = usuario::getAlertas();
+
+        $router->render('auth/reestablecer',[
+            'titulo'=>'Reestablecer contraseña',
+            'alertas'=> $alertas,
+            'mostrar'=> $mostrar
+            
         ]);
     }
 
@@ -109,8 +171,10 @@ class LoginController{
         if(!$token) header('Location: /');
 
         $usuario = usuario::where('token', $token);
+
         if(empty($usuario)){
             usuario::setAlerta('error', 'Token no valido');
+            
         }else{
             $usuario->confirmado=1;
             $usuario->token = null;
