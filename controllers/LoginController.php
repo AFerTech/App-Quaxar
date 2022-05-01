@@ -34,9 +34,9 @@ class LoginController{
                         $_SESSION['login'] = true;
 
                         // redireccionar al dashboard
-                        header('Location: /proyectos');
+                        header('Location: /dashboard');
 
-                        debuguear($_SESSION);
+                        
 
                     }else{
                         usuario::setAlerta('error', 'Contraseña incorrecta');  
