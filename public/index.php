@@ -10,7 +10,7 @@ $router = new Router();
 //Login
 $router->get('/',[LoginController::class,'login']);
 $router->post('/',[LoginController::class,'login']);
-$router->post('/logout',[LoginController::class,'logout']);
+$router->get('/logout',[LoginController::class,'logout']);
 
 
 //Crear cuenta
@@ -33,8 +33,8 @@ $router->get('/confirmar',[LoginController::class,'confirmar']);
 
 // Dashboard
 $router->get('/dashboard', [DashboardController::class, 'index']);
-
-
+$router->get('/crear_proyectos', [DashboardController::class, 'crear_proyectos']);
+$router->get('/perfil', [DashboardController::class, 'perfil']);
 
 
 

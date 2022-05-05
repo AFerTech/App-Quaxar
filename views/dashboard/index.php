@@ -1,10 +1,5 @@
 
 
-<div class="dashboard">
-    <?php include_once __DIR__ . '/../templates/sidebar.php'; ?>
+<?php include_once __DIR__ . '/header_dashboard.php'; ?>
 
-    <div class="principal">
-        <?php include_once __DIR__ . '/../templates/barra.php'; ?>
-    </div>
-</div>
-
+<?php include_once __DIR__ . '/footer_dashboard.php'; ?>
