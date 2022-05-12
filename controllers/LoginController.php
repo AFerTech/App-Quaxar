@@ -214,7 +214,7 @@ class LoginController{
             $usuario->confirmado=1;
             $usuario->token = null;
             unset($usuario->password2);
-            
+            debuguear($usuario);
             $usuario->guardar();
 
             usuario::setAlerta('exito', 'Cuenta creada correctamente');

@@ -6,6 +6,8 @@
         <a class="<?php echo ($titulo === 'Crear clientes') ? 'activo' : ''; ?>" href="/crear_clientes">Agregar Cliente</a>
         <a class="<?php echo ($titulo === 'Proyectos') ? 'activo' : ''; ?>" href="/proyectos">Proyectos</a>
         <a class="<?php echo ($titulo === 'Crear Proyectos') ? 'activo' : ''; ?>" href="/crear_proyectos">Crear Proyectos</a>
+        <a class="<?php echo ($titulo === 'Citas') ? 'activo' : ''; ?>" href="/citas">Citas</a>
+        <a class="<?php echo ($titulo === 'Crear cita') ? 'activo' : ''; ?>" href="/crear_cita">Crear cita</a>
         <a class="<?php echo ($titulo === 'Tareas') ? 'activo' : ''; ?>" href="tareas">Tareas</a>
         <a class="<?php echo ($titulo === 'Crear tarea') ? 'activo' : ''; ?>" href="agregar_area">Crear tarea</a>
         <a class="<?php echo ($titulo === 'Perfil') ? 'activo' : ''; ?>" href="/perfil">Perfil</a>
