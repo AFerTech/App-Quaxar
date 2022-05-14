@@ -33,8 +33,9 @@ $router->get('/confirmar',[LoginController::class,'confirmar']);
 
 // Dashboard
 $router->get('/dashboard', [DashboardController::class, 'index']);
-$router->get('/crear_proyectos', [DashboardController::class, 'crear_proyectos']);
-$router->post('/crear_proyectos', [DashboardController::class, 'crear_proyectos']);
+$router->get('/crear_proyectos', [DashboardController::class, 'crear_proyecto']);
+$router->post('/crear_proyectos', [DashboardController::class, 'crear_proyecto']);
+$router->get('/proyectos', [DashboardController::class, 'proyectos']);
 $router->get('/perfil', [DashboardController::class, 'perfil']);
 
 

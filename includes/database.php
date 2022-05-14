@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', 'password', 'prueba');
+$db = mysqli_connect('localhost', 'root', 'password', 'ClientesQuaxar');
 
 
 if (!$db) {
